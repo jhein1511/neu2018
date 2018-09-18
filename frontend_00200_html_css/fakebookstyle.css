@@ -18,3 +18,13 @@ color: #2980B9;
 color: #943126;
 }
 
+#meinbild {
+width: 10%;
+transition-property: width;
+transition-duration: 1s;
+transition-timing-function: linear;
+}
+
+#meinbild:hover {
+    width: 135px;
+}
