@@ -38,7 +38,9 @@ class AboutUsHandler(BaseHandler):
     def get(self):
         return self.render_template("aboutus.html")
 
+
 TOKENDICT = {}
+
 
 class ContactHandler(BaseHandler):
 
@@ -91,10 +93,34 @@ class BlogHandler(BaseHandler):
     def get(self):
         return self.render_template("blog.html")
 
+
+class SecretHandler(BaseHandler):
+    def get(self):
+        return self.render_template("secretnumber.html")
+
+    def post(self):
+        logging.info("Received POST Request {}".format(self.request.POST))
+        secret = 48
+        guess = int(self.request.get("guess"))
+
+        result = None
+
+        if secret == guess:
+            result = "You're great, the answer is correct. The secret number is 48."
+        elif secret > guess:
+            result = "Your guess is too low. Try again!"
+        elif secret < guess:
+            result = "Your guess is too high. Try again!"
+
+        params = {"result": result}
+
+        return self.render_template("secretresult.html", params=params)
+
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler),
     webapp2.Route('/aboutus', AboutUsHandler),
     webapp2.Route('/contact', ContactHandler),
     webapp2.Route('/newsletter', NewsletterHandler),
     webapp2.Route('/blog', BlogHandler),
+    webapp2.Route('/secretnumber', SecretHandler),
 ], debug=True)
