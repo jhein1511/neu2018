@@ -1,0 +1,22 @@
+{% extends "frame.html"%}
+
+
+{% block title%}
+    Length Unit Converter Page
+{% endblock title%}
+
+
+{% block content %}
+    <h1>★ Length Unit Converter ★</h1>
+    <h2>Hi! This is a unit converter which converts kilometers into miles and vice versa.</h2>
+    <form method="post">
+        <input type="number" name="quantity">
+
+        <select name="unit">
+          <option value="miles">miles to kilometers</option>
+          <option value="km">kilometers to miles</option>
+        </select>
+
+        <button type="submit" class="btn btn-info">Convert now!</button>
+    </form>
+{% endblock content %}

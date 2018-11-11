@@ -116,6 +116,30 @@ class SecretHandler(BaseHandler):
 
         return self.render_template("secretresult.html", params=params)
 
+
+class ConversionHandler(BaseHandler):
+    def get(self):
+        return self.render_template("converter.html")
+
+    def post(self):
+        first_num = float(self.request.get("quantity"))
+        selected_unit = self.request.get("unit")
+
+        second_num = None
+        second_unit = None
+
+        if selected_unit == "miles":
+            second_num = first_num * 1.60934
+            second_unit = "kilometers"
+        elif selected_unit == "km":
+            second_num = first_num * 0.621371
+            second_unit = "miles"
+
+        params = {"first_num": first_num, "first_unit": selected_unit, "second_num": second_num,
+                  "second_unit": second_unit}
+
+        return self.render_template("finalconversion.html", params=params)
+
 app = webapp2.WSGIApplication([
     webapp2.Route('/', MainHandler),
     webapp2.Route('/aboutus', AboutUsHandler),
@@ -123,4 +147,5 @@ app = webapp2.WSGIApplication([
     webapp2.Route('/newsletter', NewsletterHandler),
     webapp2.Route('/blog', BlogHandler),
     webapp2.Route('/secretnumber', SecretHandler),
+    webapp2.Route('/converter', ConversionHandler),
 ], debug=True)

@@ -1,0 +1,13 @@
+{% extends "frame.html"%}
+
+
+{% block title%}
+    Length Unit Converter – Result
+{% endblock title%}
+
+
+{% block content %}
+    <h1>★ Length Unit Converter – Result ★ </h1>
+<p><b>{{ first_num }} {{ first_unit }}</b> is equal to <b>{{ second_num }} {{ second_unit }}</b>.</p>
+    <p>Do you want to convert again? ⇨ <a href="/converter">Length Unit Converter</a></p>
+{% endblock content %}
